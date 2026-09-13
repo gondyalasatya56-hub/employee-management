@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Login</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f2f6ff;
+            margin: 0;
+        }
+
+        nav {
+            background: #1e4fa3;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+        }
+
+        .container {
+            width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e4fa3;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1e4fa3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .message {
+            color: red;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            Employee Management
+        </div>
+
+        <a href="/">Home</a>
+        <a href="/search">Search</a>
+        <a href="/employee">Employee</a>
+        <a href="/add_employee">Add Employee</a>
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>Login</h1>
+
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

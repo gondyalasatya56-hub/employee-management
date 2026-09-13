@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Employee List</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f2f6ff;
+            margin: 0;
+        }
+
+        nav {
+            background: #1e4fa3;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+        }
+
+        .container {
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e4fa3;
+            margin-bottom: 30px;
+        }
+
+        .add {
+            display: inline-block;
+            background: #1e4fa3;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background: #1e4fa3;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            Employee Management
+        </div>
+
+        <a href="/">Home</a>
+        <a href="/search">Search</a>
+        <a href="/employee">Employee</a>
+        <a href="/add_employee">Add Employee</a>
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>Employee List</h1>
+
+        <a href="/add_employee" class="add">
+            + Add Employee
+        </a>
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Salary</th>
+
+            </tr>
+
+
+            {% for employee in employees %}
+
+            <tr>
+
+                <td>{{ employee["id"] }}</td>
+
+                <td>{{ employee["name"] }}</td>
+
+                <td>{{ employee["email"] }}</td>
+
+                <td>{{ employee["phone"] }}</td>
+
+                <td>{{ employee["department"] }}</td>
+
+                <td>{{ employee["salary"] }}</td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="6">
+                    No employees found
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>
