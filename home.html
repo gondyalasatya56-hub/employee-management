@@ -1,124 +1,127 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
 
-    <title>Employee Management - Home</title>
+    <title>Home</title>
 
     <style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: Arial, sans-serif;
-            background: #f2f6ff;
+
+            margin:0;
+
+            font-family: Arial;
+
+            background: #f4f7f8;
         }
 
-        nav {
-            background: #1e4fa3;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-        }
 
-        .logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            margin-right: 40px;
-        }
+        .hero {
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-right: 25px;
-            font-size: 17px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .content {
             text-align: center;
-            padding: 100px 20px;
+
+            padding: 80px 20px;
         }
 
-        .content h1 {
-            color: #1e4fa3;
-            font-size: 42px;
-            margin-bottom: 20px;
+
+        h1 {
+
+            color: rgb(55, 116, 116);
+
+            font-size: 45px;
         }
 
-        .content p {
+
+        p {
+
             font-size: 20px;
+
+            color: #555;
         }
 
-        .buttons {
-            margin-top: 40px;
+
+        .welcome {
+
+            color: rgb(55, 116, 116);
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            margin: 20px;
         }
+
 
         .buttons a {
+
             display: inline-block;
-            background: #1e4fa3;
+
+            background: rgb(55, 116, 116);
+
             color: white;
+
             text-decoration: none;
+
             padding: 14px 25px;
+
             margin: 10px;
-            border-radius: 5px;
+
+            border-radius: 7px;
+        }
+
+
+        .buttons a:hover {
+
+            background: rgb(40, 90, 90);
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-    <nav>
+    {% include "navbar.html" %}
 
-        <div class="logo">
-            Employee Management
+
+    <div class="hero">
+
+        <h1>
+            Employee Management System
+        </h1>
+
+
+        {% if session.get("fullname") %}
+
+        <div class="welcome">
+
+            Welcome, {{ session["fullname"] }}!
+
         </div>
 
-        <a href="/">Home</a>
+        {% endif %}
 
-        <a href="/search">Search</a>
-
-        <a href="/employee">Employee</a>
-
-        <a href="/add_employee">Add Employee</a>
-
-        <a href="/register">Register</a>
-
-        <a href="/login">Login</a>
-
-    </nav>
-
-
-    <div class="content">
-
-        <h1>Employee Management System</h1>
 
         <p>
-            Welcome to Employee Management System
+            Manage employee information easily and efficiently.
         </p>
+
 
         <div class="buttons">
 
-            <a href="/employee">
-                View Employee
+            <a href="{{ url_for('employee') }}">
+                View Employees
             </a>
 
-            <a href="/add_employee">
+
+            <a href="{{ url_for('add_employee') }}">
                 Add Employee
             </a>
 
-            <a href="/search">
+
+            <a href="{{ url_for('search') }}">
                 Search Employee
             </a>
 

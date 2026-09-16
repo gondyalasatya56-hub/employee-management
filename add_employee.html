@@ -1,136 +1,445 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Add Employee</title>
 
     <style>
 
-        body {
-            font-family: Arial;
-            background: #f2f6ff;
+        * {
+
             margin: 0;
-        }
 
-        nav {
-            background: #1e4fa3;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-        }
+            padding: 0;
 
-        .logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            margin-right: 40px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-right: 25px;
-        }
-
-        .container {
-            width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-        }
-
-        h1 {
-            text-align: center;
-            color: #1e4fa3;
-            margin-bottom: 25px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
             box-sizing: border-box;
         }
 
-        button {
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background-color: #ffffff;
+        }
+
+
+        .container {
+
+            width: 75%;
+
+            max-width: 1000px;
+
+            margin: 55px auto;
+
+            padding: 35px 45px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0, 0, 0, 0.1);
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            font-size: 40px;
+
+            margin-bottom: 10px;
+
+            color: #377474;
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 19px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .row {
+
+            display: flex;
+
+            gap: 25px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .form-group {
+
+            flex: 1;
+
+            margin-bottom: 22px;
+        }
+
+
+        label {
+
+            display: block;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        input,
+        select,
+        textarea {
+
             width: 100%;
-            padding: 12px;
-            background: #1e4fa3;
+
+            padding: 13px;
+
+            font-size: 16px;
+
+            border: 1px solid #bbb;
+
+            border-radius: 5px;
+
+            outline: none;
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #377474;
+
+            box-shadow:
+                0 0 4px
+                rgba(55,116,116,0.4);
+        }
+
+
+        textarea {
+
+            resize: vertical;
+        }
+
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-top: 10px;
+        }
+
+
+        .add-btn {
+
+            background-color: #377474;
+
             color: white;
+
             border: none;
+
+            padding: 14px 30px;
+
+            font-size: 17px;
+
+            border-radius: 5px;
+
             cursor: pointer;
+        }
+
+
+        .add-btn:hover {
+
+            background-color: #285858;
+        }
+
+
+        .reset-btn {
+
+            background-color: white;
+
+            color: #333;
+
+            border: 1px solid #333;
+
+            padding: 14px 30px;
+
+            font-size: 17px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+        }
+
+
+        .reset-btn:hover {
+
+            background-color: #333;
+
+            color: white;
+        }
+
+
+        @media (max-width: 900px) {
+
+            .container {
+
+                width: 90%;
+            }
+
+
+            .row {
+
+                flex-direction: column;
+
+                gap: 0;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-    <nav>
-
-        <div class="logo">
-            Employee Management
-        </div>
-
-        <a href="/">Home</a>
-        <a href="/search">Search</a>
-        <a href="/employee">Employee</a>
-        <a href="/add_employee">Add Employee</a>
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
-
-    </nav>
+    {% include "navbar.html" %}
 
 
     <div class="container">
 
-        <h1>Add Employee</h1>
+        <h1>
+            Add Employee
+        </h1>
 
-        <form method="POST">
 
-            <input
-                type="text"
-                name="name"
-                placeholder="Employee Name"
-                required
-            >
+        <p class="subtitle">
+            Enter complete employee information
+        </p>
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required
-            >
 
-            <input
-                type="text"
-                name="phone"
-                placeholder="Phone Number"
-                required
-            >
+        <form
+            action="{{ url_for('add_employee') }}"
+            method="POST">
 
-            <input
-                type="text"
-                name="department"
-                placeholder="Department"
-                required
-            >
 
-            <input
-                type="number"
-                name="salary"
-                placeholder="Salary"
-                required
-            >
+            <!-- Full Name + Username -->
 
-            <button type="submit">
-                Add Employee
-            </button>
+            <div class="row">
+
+                <div class="form-group">
+
+                    <label>
+                        Employee Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="fullname"
+                        placeholder="Enter employee name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter username"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- Email + Phone -->
+
+            <div class="row">
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Enter phone number"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- Department + Salary -->
+
+            <div class="row">
+
+                <div class="form-group">
+
+                    <label>
+                        Department
+                    </label>
+
+                    <select
+                        name="department"
+                        required>
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="IT">
+                            IT
+                        </option>
+
+                        <option value="HR">
+                            HR
+                        </option>
+
+                        <option value="Finance">
+                            Finance
+                        </option>
+
+                        <option value="Marketing">
+                            Marketing
+                        </option>
+
+                        <option value="Sales">
+                            Sales
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Salary
+                    </label>
+
+                    <input
+                        type="number"
+                        name="salary"
+                        placeholder="Enter salary"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- Joining Date -->
+
+            <div class="row">
+
+                <div class="form-group">
+
+                    <label>
+                        Joining Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="joining_date"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+                </div>
+
+            </div>
+
+
+            <!-- Address -->
+
+            <div class="form-group">
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    name="address"
+                    rows="4"
+                    placeholder="Enter employee address"
+                    required></textarea>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="add-btn">
+
+                    Add Employee
+
+                </button>
+
+
+                <button
+                    type="reset"
+                    class="reset-btn">
+
+                    Reset
+
+                </button>
+
+            </div>
 
         </form>
 

@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6f8;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h1 {
+            color: #377474;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 95%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #377474;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #285858;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Registration Form</h1>
+
+        <form action="/register" method="POST">
+
+            <input type="text"
+                   name="fullname"
+                   placeholder="Enter Full Name"
+                   required>
+
+            <input type="text"
+                   name="username"
+                   placeholder="Enter Username"
+                   required>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Enter Password"
+                   required>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,70 +1,120 @@
+<nav class="navbar">
+
+    <div class="logo">
+        Employee Management
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('employee') }}">
+            Employee
+        </a>
+
+        <a href="{{ url_for('add_employee') }}">
+            Add Employee
+        </a>
+
+        <a href="{{ url_for('search') }}">
+            Search
+        </a>
+
+        <a href="{{ url_for('register') }}">
+            Register
+        </a>
+
+        <a href="{{ url_for('login') }}">
+            Login
+        </a>
+
+    </div>
+
+</nav>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
 
-    <title>Employee Management</title>
+    .navbar {
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        background: rgb(55, 116, 116);
 
-        body {
-            font-family: Arial, sans-serif;
-        }
+        padding: 18px 30px;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+
+    .logo {
+
+        color: white;
+
+        font-size: 22px;
+
+        font-weight: bold;
+    }
+
+
+    .nav-links {
+
+        display: flex;
+
+        gap: 15px;
+
+        align-items: center;
+    }
+
+
+    .nav-links a {
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        padding: 8px 12px;
+
+        border-radius: 5px;
+
+        transition: 0.3s;
+    }
+
+
+    .nav-links a:hover {
+
+        background-color: white;
+
+        color: rgb(55, 116, 116);
+    }
+
+
+    @media(max-width:900px) {
 
         .navbar {
-            background-color: #1e3a8a;
-            display: flex;
-            align-items: center;
-            padding: 15px 30px;
+
+            flex-direction: column;
+
+            gap: 15px;
         }
 
-        .logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            margin-right: auto;
+        .nav-links {
+
+            flex-wrap: wrap;
+
+            justify-content: center;
         }
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 5px;
-            font-size: 16px;
-        }
+    }
 
-        .navbar a:hover {
-            background-color: #2563eb;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <nav class="navbar">
-
-        <div class="logo">
-            Employee Management
-        </div>
-
-        <a href="home.html">Home</a>
-        <a href="search.html">Search</a>
-        <a href="employee.html">Employee</a>
-        <a href="add_employee.html">Add Employee</a>
-        <a href="register.html">Register</a>
-        <a href="login.html">Login</a>
-
-    </nav>
-
-</body>
-</html>
-
+</style>
