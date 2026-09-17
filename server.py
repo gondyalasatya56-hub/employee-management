@@ -343,6 +343,82 @@ def search():
 
 
 # =========================================================
+# EDIT EMPLOYEE
+# =========================================================
+
+@app.route("/edit_employee/<int:id>", methods=["GET", "POST"])
+def edit_employee(id):
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    # -----------------------------------------------------
+    # GET - SHOW EXISTING EMPLOYEE DATA
+    # -----------------------------------------------------
+
+    if request.method == "GET":
+
+        cursor.execute("""
+            SELECT *
+            FROM employees
+            WHERE id = ?
+        """, (id,))
+
+        employee = cursor.fetchone()
+
+        conn.close()
+
+        if employee:
+            return render_template(
+                "edit_employee.html",
+                employee=employee
+            )
+
+        return "Employee not found"
+
+    # -----------------------------------------------------
+    # POST - UPDATE EMPLOYEE DATA
+    # -----------------------------------------------------
+
+    fullname = request.form["fullname"]
+    username = request.form["username"]
+    email = request.form["email"]
+    phone = request.form["phone"]
+    department = request.form["department"]
+    salary = request.form["salary"]
+    joining_date = request.form["joining_date"]
+    address = request.form["address"]
+
+    cursor.execute("""
+        UPDATE employees
+        SET fullname = ?,
+            username = ?,
+            email = ?,
+            phone = ?,
+            department = ?,
+            salary = ?,
+            joining_date = ?,
+            address = ?
+        WHERE id = ?
+    """, (
+        fullname,
+        username,
+        email,
+        phone,
+        department,
+        salary,
+        joining_date,
+        address,
+        id
+    ))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/employee")
+
+
+# =========================================================
 # DELETE EMPLOYEE
 # =========================================================
 
@@ -372,4 +448,3 @@ if __name__ == "__main__":
     create_database()
 
     app.run(debug=True)
-    

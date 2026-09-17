@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Employee</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f7f8;
+        }
+
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(55, 116, 116);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .update-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background: rgb(55, 116, 116);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: #2f6869;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    {% include "navbar.html" %}
+
+    <div class="container">
+
+        <h1>Edit Employee</h1>
+
+        <form method="POST">
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                name="fullname"
+                value="{{ employee['fullname'] }}"
+                required
+            >
+
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                value="{{ employee['username'] or '' }}"
+            >
+
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                value="{{ employee['email'] or '' }}"
+            >
+
+
+            <label>Phone</label>
+
+            <input
+                type="text"
+                name="phone"
+                value="{{ employee['phone'] or '' }}"
+            >
+
+
+            <label>Department</label>
+
+            <input
+                type="text"
+                name="department"
+                value="{{ employee['department'] or '' }}"
+            >
+
+
+            <label>Salary</label>
+
+            <input
+                type="text"
+                name="salary"
+                value="{{ employee['salary'] or '' }}"
+            >
+
+
+            <label>Joining Date</label>
+
+            <input
+                type="date"
+                name="joining_date"
+                value="{{ employee['joining_date'] or '' }}"
+            >
+
+
+            <label>Address</label>
+
+            <input
+                type="text"
+                name="address"
+                value="{{ employee['address'] or '' }}"
+            >
+
+
+            <button
+                type="submit"
+                class="update-btn">
+                Update Employee
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
