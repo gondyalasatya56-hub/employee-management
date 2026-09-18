@@ -1,87 +1,195 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Register</title>
 
     <style>
+
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f2f6f8;
-            text-align: center;
-            padding-top: 50px;
+            background: #f4f7f8;
         }
 
         .container {
-            width: 400px;
-            margin: auto;
-            background-color: white;
+            width: 380px;
+            margin: 50px auto;
+            background: white;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px gray;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         h1 {
-            color: #377474;
+            text-align: center;
+            color: rgb(55, 116, 116);
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
         }
 
         input {
-            width: 90%;
+            width: 100%;
+            box-sizing: border-box;
             padding: 12px;
-            margin: 10px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: rgb(55, 116, 116);
         }
 
         button {
-            width: 95%;
-            padding: 12px;
-            margin-top: 15px;
-            background-color: #377474;
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            background: rgb(55, 116, 116);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #285858;
+            background: rgb(40, 90, 90);
         }
+
+        .message {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .link a {
+            color: rgb(55, 116, 116);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+    {% include "navbar.html" %}
+
+
     <div class="container">
 
-        <h1>Registration Form</h1>
+        <h1>📝 Register</h1>
 
-        <form action="/register" method="POST">
 
-            <input type="text"
-                   name="fullname"
-                   placeholder="Enter Full Name"
-                   required>
+        <form action="{{ url_for('register') }}" method="POST">
 
-            <input type="text"
-                   name="username"
-                   placeholder="Enter Username"
-                   required>
+            <label>
+                Full Name
+            </label>
 
-            <input type="password"
-                   name="password"
-                   placeholder="Enter Password"
-                   required>
+            <input
+                type="text"
+                name="fullname"
+                placeholder="Enter full name"
+                required>
 
-            <button type="submit">Register</button>
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                required>
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required>
+
+
+            <button type="submit">
+                📝 Register
+            </button>
 
         </form>
 
+
+        {% if error %}
+
+        <p class="message">
+            {{ error }}
+        </p>
+
+        {% endif %}
+
+
+        <div class="link">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                🔐 Login
+            </a>
+
+        </div>
+
     </div>
+
+
+    <script>
+
+        function darkMode() {
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("theme", "dark");
+        }
+
+
+        function lightMode() {
+            document.body.classList.remove("dark-mode");
+            localStorage.setItem("theme", "light");
+        }
+
+
+        window.addEventListener("DOMContentLoaded", function() {
+
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-mode");
+            }
+
+        });
+
+    </script>
 
 </body>
 

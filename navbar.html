@@ -7,30 +7,45 @@
     <div class="nav-links">
 
         <a href="{{ url_for('home') }}">
-            Home
+            🏠 Home
         </a>
 
         <a href="{{ url_for('employee') }}">
-            Employee
+            👥 Employee
         </a>
 
         <a href="{{ url_for('add_employee') }}">
-            Add Employee
+            ➕ Add Employee
         </a>
 
         <a href="{{ url_for('search') }}">
-            Search
+            🔍 Search
         </a>
 
         <a href="{{ url_for('register') }}">
-            Register
+            📝 Register
         </a>
 
         <a href="{{ url_for('login') }}">
-            Login
+            🔐 Login
         </a>
 
     </div>
+
+
+    <!-- Hide Dark and Light buttons on Register and Login pages -->
+
+    {% if request.path != '/register' and request.path != '/login' %}
+
+    <div class="theme-buttons">
+
+        <button onclick="darkMode()">🌙 Dark</button>
+
+        <button onclick="lightMode()">☀️ Light</button>
+
+    </div>
+
+    {% endif %}
 
 </nav>
 
@@ -38,80 +53,60 @@
 <style>
 
     .navbar {
-
         background: rgb(55, 116, 116);
-
         padding: 18px 30px;
-
         display: flex;
-
         justify-content: space-between;
-
         align-items: center;
-
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-
     .logo {
-
         color: white;
-
         font-size: 22px;
-
         font-weight: bold;
     }
 
-
     .nav-links {
-
         display: flex;
-
         gap: 15px;
-
         align-items: center;
     }
 
-
     .nav-links a {
-
         color: white;
-
         text-decoration: none;
-
         font-size: 16px;
-
         font-weight: bold;
-
         padding: 8px 12px;
-
         border-radius: 5px;
-
         transition: 0.3s;
     }
 
-
     .nav-links a:hover {
-
         background-color: white;
-
         color: rgb(55, 116, 116);
     }
 
+    .theme-buttons {
+        display: flex;
+        gap: 5px;
+    }
+
+    .theme-buttons button {
+        padding: 5px 10px;
+        cursor: pointer;
+    }
 
     @media(max-width:900px) {
 
         .navbar {
-
             flex-direction: column;
-
             gap: 15px;
         }
 
         .nav-links {
-
             flex-wrap: wrap;
-
             justify-content: center;
         }
 

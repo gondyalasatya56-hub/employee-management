@@ -7,104 +7,223 @@
 
     <style>
 
+        /* =========================
+           BASIC PAGE
+           ========================= */
+
         body {
-
             margin: 0;
-
-            font-family: Arial;
-
+            font-family: Arial, sans-serif;
             background: #f4f7f8;
+            color: #222;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
 
         .container {
-
             width: 92%;
-
             margin: 40px auto;
         }
 
 
         h1 {
-
             text-align: center;
-
             color: rgb(55, 116, 116);
+            margin-bottom: 30px;
         }
 
 
+        /* =========================
+           SEARCH BOX
+           ========================= */
+
         .search-box {
-
             text-align: center;
-
             margin: 30px;
         }
 
 
         .search-box input {
-
             width: 350px;
-
             padding: 13px;
-
             border: 1px solid #ccc;
-
             border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+
+        .search-box input:focus {
+            outline: none;
+            border-color: rgb(55, 116, 116);
         }
 
 
         .search-box button {
-
             padding: 13px 22px;
-
+            margin-left: 5px;
             background: rgb(55, 116, 116);
-
             color: white;
-
             border: none;
-
             border-radius: 6px;
-
             cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
         }
 
 
+        .search-box button:hover {
+            background: rgb(40, 90, 90);
+        }
+
+
+        /* =========================
+           EMPLOYEE TABLE
+           ========================= */
+
         table {
-
             width: 100%;
-
             border-collapse: collapse;
-
             background: white;
+            color: #222;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
 
         th {
-
             background: rgb(55, 116, 116);
-
             color: white;
-
             padding: 14px;
+            text-align: center;
         }
 
 
         td {
-
             padding: 12px;
-
             text-align: center;
-
+            background: white;
+            color: #222;
             border-bottom: 1px solid #ddd;
         }
 
 
-        .message {
-
-            text-align: center;
-
-            font-size: 18px;
+        tr:hover td {
+            background: #f2f2f2;
+            color: #222;
         }
+
+
+        /* =========================
+           MESSAGE
+           ========================= */
+
+        .message {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+
+
+        /* =========================
+           DARK MODE
+           ========================= */
+
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+
+        body.dark-mode h1 {
+            color: white;
+        }
+
+
+        /* Search input in dark mode */
+
+        body.dark-mode .search-box input {
+            background-color: #2b2b2b;
+            color: white;
+            border-color: #666;
+        }
+
+
+        body.dark-mode .search-box input::placeholder {
+            color: #bbbbbb;
+        }
+
+
+        /* Search button */
+
+        body.dark-mode .search-box button {
+            background: rgb(55, 116, 116);
+            color: white;
+        }
+
+
+        /* =========================
+           TABLE DARK MODE FIX
+           ========================= */
+
+        body.dark-mode table {
+            background-color: white !important;
+            color: #222 !important;
+        }
+
+
+        body.dark-mode th {
+            background-color: rgb(55, 116, 116) !important;
+            color: white !important;
+        }
+
+
+        body.dark-mode td {
+            background-color: white !important;
+            color: #222 !important;
+            border-bottom: 1px solid #ccc;
+        }
+
+
+        body.dark-mode tr:hover td {
+            background-color: #eeeeee !important;
+            color: #222 !important;
+        }
+
+
+        /* Message in dark mode */
+
+        body.dark-mode .message {
+            color: white;
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 900px) {
+
+            .container {
+                width: 95%;
+            }
+
+            .search-box input {
+                width: 70%;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+        }
+
 
     </style>
 
@@ -113,31 +232,41 @@
 
 <body>
 
+
+    <!-- NAVBAR -->
+
     {% include "navbar.html" %}
 
 
+    <!-- MAIN CONTAINER -->
+
     <div class="container">
 
+
         <h1>
-            Search Employee
+            🔍 Search Employee
         </h1>
 
+
+        <!-- SEARCH FORM -->
 
         <div class="search-box">
 
             <form
                 method="GET"
-                action="{{ url_for('search') }}">
+                action="{{ url_for('search') }}"
+            >
 
                 <input
                     type="text"
                     name="keyword"
                     value="{{ keyword }}"
-                    placeholder="Search name, username, email or department">
+                    placeholder="Search name, username, email or department"
+                >
 
 
                 <button type="submit">
-                    Search
+                     Search
                 </button>
 
             </form>
@@ -145,10 +274,13 @@
         </div>
 
 
+        <!-- SEARCH RESULTS -->
+
         {% if keyword %}
 
 
             {% if employees %}
+
 
             <table>
 
@@ -179,25 +311,31 @@
                         {{ employee["id"] }}
                     </td>
 
+
                     <td>
                         {{ employee["fullname"] }}
                     </td>
+
 
                     <td>
                         {{ employee["username"] or "Not Added" }}
                     </td>
 
+
                     <td>
                         {{ employee["email"] or "Not Added" }}
                     </td>
+
 
                     <td>
                         {{ employee["phone"] or "Not Added" }}
                     </td>
 
+
                     <td>
                         {{ employee["department"] or "Not Added" }}
                     </td>
+
 
                     <td>
                         {{ employee["salary"] or "Not Added" }}
@@ -207,27 +345,71 @@
 
                 {% endfor %}
 
+
             </table>
 
 
             {% else %}
 
+
             <p class="message">
-                No employee found.
+                ❌ No employee found.
             </p>
+
 
             {% endif %}
 
 
         {% else %}
 
+
         <p class="message">
-            Enter employee name or username to search.
+             Enter employee name or username to search.
         </p>
+
 
         {% endif %}
 
+
     </div>
+
+
+    <!-- DARK / LIGHT MODE -->
+
+    <script>
+
+
+        function darkMode() {
+
+            document.body.classList.add("dark-mode");
+
+            localStorage.setItem("theme", "dark");
+
+        }
+
+
+        function lightMode() {
+
+            document.body.classList.remove("dark-mode");
+
+            localStorage.setItem("theme", "light");
+
+        }
+
+
+        window.addEventListener("DOMContentLoaded", function() {
+
+            if (localStorage.getItem("theme") === "dark") {
+
+                document.body.classList.add("dark-mode");
+
+            }
+
+        });
+
+
+    </script>
+
 
 </body>
 

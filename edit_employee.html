@@ -57,7 +57,49 @@
         .update-btn:hover {
             background: #2f6869;
         }
+       /* LIGHT MODE */
+body {
+    background-color: #f5f8fc;
+    color: #222;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Dark mode for common page sections */
+body.dark-mode .container,
+body.dark-mode .card,
+body.dark-mode .form-container,
+body.dark-mode .employee-container {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Dark mode for headings and paragraphs */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode label {
+    color: #ffffff;
+}
+
+/* Dark mode for input boxes */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border-color: #555;
+}
+
+body.dark-mode input::placeholder {
+    color: #bbbbbb;
+}
     </style>
 
 </head>
@@ -65,7 +107,7 @@
 <body>
 
     {% include "navbar.html" %}
-
+   
     <div class="container">
 
         <h1>Edit Employee</h1>
@@ -154,7 +196,23 @@
         </form>
 
     </div>
+<script>
+function darkMode() {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+}
 
+function lightMode() {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
 </body>
 
 </html>
