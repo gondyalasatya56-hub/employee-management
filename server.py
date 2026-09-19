@@ -68,10 +68,17 @@ def create_database():
 # =========================================================
 
 @app.route("/")
+def first_page():
+    return render_template("login_register.html")
+
+
 @app.route("/home")
 def home():
-    return render_template("home.html")
 
+    if "username" not in session:
+        return redirect("/")
+
+    return render_template("home.html")
 
 # =========================================================
 # REGISTER
@@ -173,7 +180,7 @@ def login():
             session["fullname"] = user["fullname"]
             session["username"] = user["username"]
 
-            return redirect("/")
+            return redirect("/home")
 
         else:
 
@@ -206,8 +213,7 @@ def add_employee():
         conn = get_db()
         cursor = conn.cursor()
 
-        # Check whether this registered username
-        # already exists in employee table
+        # Check whether username already exists
         cursor.execute("""
             SELECT *
             FROM employees
@@ -218,7 +224,7 @@ def add_employee():
 
         if existing_employee:
 
-            # Update existing registered employee
+            # Update existing employee
             cursor.execute("""
                 UPDATE employees
                 SET fullname = ?,
@@ -369,6 +375,7 @@ def edit_employee(id):
         conn.close()
 
         if employee:
+
             return render_template(
                 "edit_employee.html",
                 employee=employee
