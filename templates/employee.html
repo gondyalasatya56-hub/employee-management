@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Employee List</title>
+
+    <style>
+
+        body {
+        .edit-btn {
+    background-color: #3b7f80;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.edit-btn:hover {
+    background-color: #2f6869;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+            margin: 0;
+
+            font-family: Arial;
+
+            background: #f4f7f8;
+        }
+
+
+        .container {
+
+            width: 95%;
+
+            margin: 40px auto;
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            color: rgb(55, 116, 116);
+        }
+
+
+        .add {
+
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            background: rgb(55, 116, 116);
+
+            color: white;
+
+            padding: 12px 20px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0,0,0,0.15);
+        }
+
+
+        th {
+
+            background: rgb(55, 116, 116);
+
+            color: white;
+
+            padding: 13px;
+        }
+
+
+        td {
+
+            padding: 12px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        tr:hover {
+
+            background: #f1fafa;
+        }
+
+
+        .delete {
+
+            background: #d9534f;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+        }
+
+
+        .delete:hover {
+
+            background: #c9302c;
+        }
+
+
+        .empty {
+
+            text-align: center;
+
+            font-size: 18px;
+
+            color: #555;
+        }
+        /* LIGHT MODE */
+body {
+    background-color: #f5f8fc;
+    color: #222;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Dark mode for common page sections */
+body.dark-mode .container,
+body.dark-mode .card,
+body.dark-mode .form-container,
+body.dark-mode .employee-container {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Dark mode for headings and paragraphs */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode label {
+    color: #ffffff;
+}
+
+/* Dark mode for input boxes */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border-color: #555;
+}
+
+body.dark-mode input::placeholder {
+    color: #bbbbbb;
+}
+/* =========================
+   DARK MODE - EMPLOYEE TABLE
+   ========================= */
+
+body.dark-mode {
+    background: #111;
+    color: white;
+}
+
+/* Employee table */
+body.dark-mode table {
+    background: #ffffff;
+    color: #222;
+}
+
+/* Table heading */
+body.dark-mode th {
+    background: rgb(55, 116, 116);
+    color: white;
+}
+
+/* Employee data */
+body.dark-mode td {
+    background: #ffffff;
+    color: #222;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Edit button */
+body.dark-mode .edit-btn {
+    background: rgb(55, 116, 116);
+    color: white;
+}
+
+/* Delete button */
+body.dark-mode .delete-btn {
+    background: #f44336;
+    color: white;
+}
+  
+.search-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #377474;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.search-btn:hover {
+    background: #285858;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+    {% include "navbar.html" %}
+    
+
+
+    <div class="container">
+        <a href="{{ url_for('search') }}" class="search-btn">
+    🔍 Search Employee
+</a>
+
+        <h1>
+            Employee List📃
+        </h1>
+
+
+        <a
+            class="add"
+            href="{{ url_for('add_employee') }}">
+
+            + Add Employee
+
+        </a>
+
+
+        {% if employees %}
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Full Name</th>
+
+                <th>Username</th>
+
+                <th>Email</th>
+
+                <th>Phone</th>
+
+                <th>Department</th>
+
+                <th>Salary</th>
+
+                <th>Joining Date</th>
+
+                <th>Address</th>
+
+                <th>Action</th>
+
+            </tr>
+
+
+            {% for employee in employees %}
+
+            <tr>
+
+                <td>
+                    {{ employee["id"] }}
+                </td>
+
+
+                <td>
+                    {{ employee["fullname"] }}
+                </td>
+
+
+                <td>
+                    {{ employee["username"] or "Not Added" }}
+                </td>
+
+
+                <td>
+                    {{ employee["email"] or "Not Added" }}
+                </td>
+
+
+                <td>
+                    {{ employee["phone"] or "Not Added" }}
+                </td>
+
+
+                <td>
+                    {{ employee["department"] or "Not Added" }}
+                </td>
+
+
+                <td>
+                    {{ employee["salary"] or "Not Added" }}
+                </td>
+
+
+                <td>
+                    {{ employee["joining_date"] or "Not Added" }}
+                </td>
+
+
+                <td>
+                    {{ employee["address"] or "Not Added" }}
+                </td>
+                <td>
+
+    <a href="/edit_employee/{{ employee['id'] }}">
+        <button class="edit-btn">Edit😎</button>
+    </a>
+
+    <a href="/delete_employee/{{ employee['id'] }}">
+        <button class="delete-btn">Delete❌</button>
+    </a>
+
+</td>
+                
+                 </tr>
+
+            {% endfor %}
+
+        </table>
+
+
+        {% else %}
+
+        <p class="empty">
+            No employees found.
+        </p>
+
+        {% endif %}
+      
+
+    </div>
+<script>
+function darkMode() {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+}
+
+function lightMode() {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
+</body>
+
+</html>

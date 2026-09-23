@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Register 📝</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f7f8;
+            color: #222;
+            transition: 0.3s;
+        }
+
+        .register-container {
+            width: 420px;
+            margin: 60px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(55,116,116);
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: rgb(55,116,116);
+        }
+
+        .register-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            background: rgb(55,116,116);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .register-btn:hover {
+            background: rgb(40,90,90);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: rgb(55,116,116);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .error {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
+
+
+        /* DARK MODE */
+
+        body.dark-mode {
+            background: #121212;
+            color: white;
+        }
+
+        body.dark-mode .register-container {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode h1 {
+            color: #8fd0d0;
+        }
+
+        body.dark-mode label {
+            color: white;
+        }
+
+        body.dark-mode input {
+            background: #2b2b2b;
+            color: white;
+            border-color: #555;
+        }
+
+        body.dark-mode input::placeholder {
+            color: #bbb;
+        }
+
+        body.dark-mode .login-link a {
+            color: #8fd0d0;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    {% include "navbar.html" %}
+
+
+    <div class="register-container">
+
+        <h1>Register 📝</h1>
+
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                name="fullname"
+                placeholder="Enter full name"
+                required
+            >
+
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <button type="submit" class="register-btn">
+                Register 📝
+            </button>
+
+        </form>
+
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login 🔐
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Employee</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f7f8;
+        }
+
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(55, 116, 116);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .update-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background: rgb(55, 116, 116);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: #2f6869;
+        }
+       /* LIGHT MODE */
+body {
+    background-color: #f5f8fc;
+    color: #222;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Dark mode for common page sections */
+body.dark-mode .container,
+body.dark-mode .card,
+body.dark-mode .form-container,
+body.dark-mode .employee-container {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Dark mode for headings and paragraphs */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode label {
+    color: #ffffff;
+}
+
+/* Dark mode for input boxes */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border-color: #555;
+}
+
+body.dark-mode input::placeholder {
+    color: #bbbbbb;
+}
+    </style>
+
+</head>
+
+<body>
+
+    {% include "navbar.html" %}
+   
+    <div class="container">
+
+        <h1>Edit Employee</h1>
+
+        <form method="POST">
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                name="fullname"
+                value="{{ employee['fullname'] }}"
+                required
+            >
+
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                value="{{ employee['username'] or '' }}"
+            >
+
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                value="{{ employee['email'] or '' }}"
+            >
+
+
+            <label>Phone</label>
+
+            <input
+                type="text"
+                name="phone"
+                value="{{ employee['phone'] or '' }}"
+            >
+
+
+            <label>Department</label>
+
+            <input
+                type="text"
+                name="department"
+                value="{{ employee['department'] or '' }}"
+            >
+
+
+            <label>Salary</label>
+
+            <input
+                type="text"
+                name="salary"
+                value="{{ employee['salary'] or '' }}"
+            >
+
+
+            <label>Joining Date</label>
+
+            <input
+                type="date"
+                name="joining_date"
+                value="{{ employee['joining_date'] or '' }}"
+            >
+
+
+            <label>Address</label>
+
+            <input
+                type="text"
+                name="address"
+                value="{{ employee['address'] or '' }}"
+            >
+
+
+            <button
+                type="submit"
+                class="update-btn">
+                Update Employee
+            </button>
+
+        </form>
+
+    </div>
+<script>
+function darkMode() {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+}
+
+function lightMode() {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
+</body>
+
+</html>
