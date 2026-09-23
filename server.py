@@ -27,10 +27,7 @@ def create_database():
     conn = get_db()
     cursor = conn.cursor()
 
-    # -----------------------------------------------------
     # USERS TABLE
-    # -----------------------------------------------------
-
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,10 +37,7 @@ def create_database():
         )
     """)
 
-    # -----------------------------------------------------
     # EMPLOYEES TABLE
-    # -----------------------------------------------------
-
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS employees (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -80,6 +74,7 @@ def home():
 
     return render_template("home.html")
 
+
 # =========================================================
 # REGISTER
 # =========================================================
@@ -100,7 +95,7 @@ def register():
 
         try:
 
-            # Save user in users table
+            # Save user
             cursor.execute("""
                 INSERT INTO users
                 (fullname, username, password)
@@ -176,7 +171,6 @@ def login():
 
         if user:
 
-            # Store login information
             session["fullname"] = user["fullname"]
             session["username"] = user["username"]
 
@@ -185,7 +179,6 @@ def login():
         else:
 
             error = "Username or password incorrect!"
-            
 
     return render_template(
         "login.html",
@@ -249,7 +242,7 @@ def add_employee():
 
         else:
 
-            # Add completely new employee
+            # Add new employee
             cursor.execute("""
                 INSERT INTO employees
                 (
@@ -359,10 +352,6 @@ def edit_employee(id):
     conn = get_db()
     cursor = conn.cursor()
 
-    # -----------------------------------------------------
-    # GET - SHOW EXISTING EMPLOYEE DATA
-    # -----------------------------------------------------
-
     if request.method == "GET":
 
         cursor.execute("""
@@ -383,10 +372,6 @@ def edit_employee(id):
             )
 
         return "Employee not found"
-
-    # -----------------------------------------------------
-    # POST - UPDATE EMPLOYEE DATA
-    # -----------------------------------------------------
 
     fullname = request.form["fullname"]
     username = request.form["username"]

@@ -1,0 +1,135 @@
+<div class="navbar">
+
+    <div class="logo">
+        Employee Management
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">
+            🏠 Home
+        </a>
+
+        <a href="{{ url_for('employee') }}">
+            👥 Employee
+        </a>
+
+        <a href="{{ url_for('add_employee') }}">
+            ➕ Add Employee
+        </a>
+
+        <a href="{{ url_for('register') }}">
+            📝 Register
+        </a>
+
+        <a href="{{ url_for('login') }}">
+            🔐 Login
+        </a>
+
+    </div>
+
+    <div class="theme-buttons">
+
+        <button onclick="darkMode()">
+            🌙 Dark
+        </button>
+
+        <button onclick="lightMode()">
+            ☀️ Light
+        </button>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .navbar {
+        background: rgb(55, 116, 116);
+        min-height: 74px;
+        padding: 0 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        box-sizing: border-box;
+    }
+
+    .logo {
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+        color: #d8ffff;
+    }
+
+    .theme-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .theme-buttons button {
+        padding: 8px 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .theme-buttons button:hover {
+        background: #e0eeee;
+    }
+
+</style>
+
+
+<script>
+
+    function darkMode() {
+
+        document.body.classList.add("dark-mode");
+
+        localStorage.setItem("theme", "dark");
+
+    }
+
+
+    function lightMode() {
+
+        document.body.classList.remove("dark-mode");
+
+        localStorage.setItem("theme", "light");
+
+    }
+
+
+    window.addEventListener("DOMContentLoaded", function () {
+
+        if (localStorage.getItem("theme") === "dark") {
+
+            document.body.classList.add("dark-mode");
+
+        }
+
+    });
+
+</script>
